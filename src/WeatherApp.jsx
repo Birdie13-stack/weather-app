@@ -32,7 +32,11 @@ function WeatherApp() {
         return res.json();
       })
       .then((data) => {
-        setWeather(data);
+        if (data.sys.country) {
+            setWeather(data);
+          } else {
+            throw new Error("Invalid city name");
+          }
       })
       .catch((error) => {
         setError("Error fetching weather data");
