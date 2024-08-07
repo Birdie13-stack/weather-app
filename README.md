@@ -10,7 +10,7 @@ A simple weather application that allows users to fetch and display weather info
 
 ## Live Demo: 
 
-[https://weather-app-sigma-olive.vercel.app/]
+https://weather-app-sigma-olive.vercel.app/
 
 ## Technologies Used:
 * React
