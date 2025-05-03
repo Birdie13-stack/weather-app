@@ -32,7 +32,6 @@ function App() {
         if (data.cod === 200) {
           setWeatherData(data);
           setError("");
-          setCity("");
         } else {
           setWeatherData("");
           setError(data.message);
