@@ -18,7 +18,7 @@ function App() {
     }
 
     setLoading(true);
-    fetchWeather();
+    fetchWeather(city);
   };
 
   function fetchWeather(selectedCity) {
