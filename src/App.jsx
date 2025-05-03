@@ -10,18 +10,20 @@ function App() {
   const apiKey = "d42f08cf7415b017ff224e02e22a5366";
 
   const getWeather = (e) => {
-    console.log(city);
     e.preventDefault();
 
-    fetchWeather();
-    setLoading(true);
+    if (!city.trim()) {
+      setError("Please enter a city name.");
+      return;
+    }
 
-    setCity("");
+    setLoading(true);
+    fetchWeather();
   };
 
-  function fetchWeather() {
+  function fetchWeather(selectedCity) {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&appid=${apiKey}&units=metric`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -29,10 +31,11 @@ function App() {
 
         if (data.cod === 200) {
           setWeatherData(data);
-          setError(""); // clear any previous error
+          setError("");
+          setCity("");
         } else {
-          setWeatherData(""); // clear previous weather data
-          setError(data.message); // show API error message (like 'city not found')
+          setWeatherData("");
+          setError(data.message);
         }
 
         setLoading(false);
@@ -58,7 +61,7 @@ function App() {
             onChange={(e) => setCity(e.target.value)}
           />
 
-          <button>Fetch Weather</button>
+          <button disabled={loading}>Fetch Weather</button>
         </form>
 
         {loading && <p style={{ color: "green" }}>Loading...</p>}
